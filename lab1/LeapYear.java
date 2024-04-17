@@ -1,7 +1,17 @@
-/** Class that determines whether or not a year is a leap year.
- *  @author YOUR NAME HERE
- */
 public class LeapYear {
+
+/*
+ * 确定给定年份是否为闰年。
+ * 能被4整除但不能被100整除的年份是闰年，
+ * 除非它也能被 400 整除。
+ */
+    public static boolean isLeapYear(int year) {
+        if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+            return true;
+        } else {
+        return false;
+        }
+    }
 
     /** Calls isLeapYear to print correct statement.
      *  @param  year to be analyzed
@@ -30,4 +40,3 @@ public class LeapYear {
         }
     }
 }
-
