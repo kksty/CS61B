@@ -69,4 +69,20 @@ public class Planet  {
         return Fny;
     }
 
+    // 施加的力将导致物体运动,短时间内物体速度和位置的变化
+    public void update(double dt, double fX, double fY){
+        double ax = fX / this.mass;
+        double ay = fY / this.mass;
+        double vx = this.xxVel + dt * ax;
+        double vy = this.yyVel + dt * ay;
+        double px = this.xxPos + dt * vx;
+        double py = this.yyPos + dt * vy;
+        this.xxPos = px;
+        this.yyPos = py;
+        this.xxVel = vx;
+        this.yyVel = vy;
+    }
+
+
+
 }
