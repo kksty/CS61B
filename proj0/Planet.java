@@ -6,7 +6,7 @@ public class Planet  {
     public double yyVel; //当前y方向速度
     public double mass; //质量
     public String imgFileName;
-    static final double G = 6.67E-11;
+    private static final double G = 6.67E-11;
 
     public Planet(double xP, double yP, double xV, double yV, double m, String img){
        this.xxPos = xP;
