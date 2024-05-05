@@ -5,7 +5,7 @@ import java.util.Formatter;
  * with a large number of additional methods.
  *
  * @author P. N. Hilfinger, with some modifications by Josh Hug and melaniecebula
- *         [Do not modify this file.]
+ * [Do not modify this file.]
  */
 public class IntList {
     /**
@@ -29,7 +29,7 @@ public class IntList {
      * A List with null rest, and first = 0.
      */
     public IntList() {
-    /* NOTE: public IntList () { }  would also work. */
+        /* NOTE: public IntList () { }  would also work. */
         this(0, null);
     }
 
@@ -82,7 +82,19 @@ public class IntList {
 
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        if (A == null && B == null) {
+            return null;
+        } else if (A == null) {
+            return B;
+        } else if (B == null) {
+            return A;
+        }
+        IntList pos = A;
+        while (pos.rest != null) {
+            pos = pos.rest;
+        }
+        pos.rest = B;
+        return A;
     }
 
     /**
@@ -91,22 +103,30 @@ public class IntList {
      */
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        if (A == null && B == null) {
+            return null;
+        } else if (A == null) {
+            return B;
+        } else if (B == null) {
+            return A;
+        }
+        IntList C = new IntList(A.first, A.rest);
+        IntList pos = C;
+        A = A.rest;
+        while (A != null) {
+            pos.rest = new IntList(A.first, A.rest);
+            A = A.rest;
+            pos = pos.rest;
+        }
+        while (B != null){
+            pos.rest = new IntList(B.first,B.rest);
+            B = B.rest;
+            pos = pos.rest;
+        }
+
+        return C;
+
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     /**
@@ -209,8 +229,7 @@ public class IntList {
 
     @Override
     /** Outputs the IntList as a String. You are not expected to read
-     * or understand this method. */
-    public String toString() {
+     * or understand this method. */ public String toString() {
         Formatter out = new Formatter();
         String sep;
         sep = "(";
