@@ -36,6 +36,7 @@ public class LinkedListDeque<T> {
             sentinel.prev = sentinel.next;
         } else {
             sentinel.next = new IntNode(sentinel, item, sentinel.next);
+            sentinel.next.next.prev = sentinel.next;
         }
 
         size++;
@@ -48,7 +49,7 @@ public class LinkedListDeque<T> {
     }
 
     public boolean isEmpty() {
-        if (sentinel.next == sentinel && sentinel.prev == sentinel) {
+        if (sentinel.next == sentinel) {
             return true;
         } else {
             return false;
@@ -135,5 +136,6 @@ public class LinkedListDeque<T> {
         }
         return getRecursive(ptr.next, index, tmp + 1);
     }
+
 
 }
