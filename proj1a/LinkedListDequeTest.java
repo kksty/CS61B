@@ -85,11 +85,13 @@ public class LinkedListDequeTest {
 
         printTestStatus(passed);
 
+        lld1.addFirst(2);
         lld1.addLast(0);
-//        lld1.addLast(1);
+        lld1.addLast(1);
         lld1.removeLast();
         lld1.addFirst(3);
         lld1.removeLast();
+        lld1.removeFirst();
         System.out.println("准备打印");
         lld1.printDeque();
     }
