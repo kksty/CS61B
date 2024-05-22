@@ -1,9 +1,11 @@
+/*链表双端队列*/
+
 public class LinkedListDeque<T> {
 
     private IntNode sentinel;
     private int size;
 
-    public class IntNode {
+    private class IntNode {
         public T item;
         public IntNode prev;
         public IntNode next;
@@ -21,12 +23,12 @@ public class LinkedListDeque<T> {
         sentinel.next = sentinel;
     }
 
-    public LinkedListDeque(T item) {
-        sentinel = new IntNode(null, null, null);
-        sentinel.next = new IntNode(sentinel, item, sentinel);
-        sentinel.prev = sentinel.next;
-        size++;
-    }
+//    public LinkedListDeque(T item) {
+//        sentinel = new IntNode(null, null, null);
+//        sentinel.next = new IntNode(sentinel, item, sentinel);
+//        sentinel.prev = sentinel.next;
+//        size++;
+//    }
 
     public void addFirst(T item) {
         if (isEmpty()) {
@@ -46,9 +48,11 @@ public class LinkedListDeque<T> {
     }
 
     public boolean isEmpty() {
-        if (sentinel.next == sentinel) {
+        if (sentinel.next == sentinel && sentinel.prev == sentinel) {
             return true;
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
     public int size() {
@@ -64,19 +68,41 @@ public class LinkedListDeque<T> {
     }
 
     public T removeFirst() {
+//        if (!isEmpty()) {
+//            if (sentinel.next.next == sentinel) {
+//                T tmp = sentinel.next.item;
+//                sentinel.next = sentinel.next.next;
+//                sentinel.prev = sentinel.prev.prev;
+//                return tmp;
+//            } else {
+//                T tmp = sentinel.next.item;
+//                sentinel.next = sentinel.next.next;
+//                return tmp;
+//            }
+//        } else {
+//            return null;
+//        }
         if (!isEmpty()) {
             T tmp = sentinel.next.item;
+            IntNode intermediateNode = sentinel.next.next;
             sentinel.next = sentinel.next.next;
+            sentinel.prev = intermediateNode;
             return tmp;
-        } else return null;
+        } else {
+            return null;
+        }
     }
 
     public T removeLast() {
         if (!isEmpty()) {
             T tmp = sentinel.prev.item;
+            IntNode intermediateNode = sentinel.prev.prev;
             sentinel.prev.prev.next = sentinel;
+            sentinel.prev = intermediateNode;
             return tmp;
-        } else return null;
+        } else {
+            return null;
+        }
     }
 
     public T get(int index) {

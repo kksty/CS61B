@@ -61,6 +61,7 @@ public class LinkedListDequeTest {
         lld1.printDeque();
 
         printTestStatus(passed);
+
     }
 
     /**
@@ -83,11 +84,19 @@ public class LinkedListDequeTest {
         passed = checkEmpty(true, lld1.isEmpty()) && passed;
 
         printTestStatus(passed);
+
+        lld1.addLast(0);
+//        lld1.addLast(1);
+        lld1.removeLast();
+        lld1.addFirst(3);
+        lld1.removeLast();
+        System.out.println("准备打印");
+        lld1.printDeque();
     }
 
     public static void main(String[] args) {
         System.out.println("Running tests.\n");
-        addIsEmptySizeTest();
-//        addRemoveTest();
+//        addIsEmptySizeTest();
+        addRemoveTest();
     }
 } 

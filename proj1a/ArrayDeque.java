@@ -1,3 +1,5 @@
+/*数组双端队列*/
+
 public class ArrayDeque<T> {
 
     private int size = 0;
@@ -268,13 +270,5 @@ public class ArrayDeque<T> {
             return this.arrays[n - this.arrays.length];
         }
     }
-
-    public static void main(String[] args) {
-        ArrayDeque test = new ArrayDeque();
-        for (int i = 0; i < 8; i++) {
-
-            test.addLast(i);
-
-        }
-    }
+    
 }
