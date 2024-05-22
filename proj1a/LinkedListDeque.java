@@ -75,6 +75,7 @@ public class LinkedListDeque<T> {
             } else {
                 sentinel.next = sentinel.next.next;
                 sentinel.next.prev = sentinel;
+                size--;
                 return tmp;
             }
         } else {
