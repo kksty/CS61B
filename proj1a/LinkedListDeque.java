@@ -109,10 +109,6 @@ public class LinkedListDeque<T> {
         return null;
     }
 
-//    public LinkedListDeque(LinkedListDeque other) {
-//
-//    }
-
     public T getRecursive(int index) {
         return getRecursive(sentinel, index, 0);
     }
