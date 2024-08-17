@@ -1,6 +1,6 @@
 /*链表双端队列*/
 
-public class LinkedListDeque<T> implements Deque<T>{
+public class LinkedListDeque<T> implements Deque<T> {
 
     private IntNode sentinel;
     private int size;
@@ -41,16 +41,19 @@ public class LinkedListDeque<T> implements Deque<T>{
         }
         size++;
     }
+
     @Override
     public void addLast(T item) {
         sentinel.prev.next = new IntNode(sentinel.prev, item, sentinel);
         sentinel.prev = sentinel.prev.next;
         size++;
     }
+
     @Override
     public int size() {
         return size;
     }
+
     @Override
     public void printDeque() {
         IntNode ptr = sentinel.next;
@@ -59,6 +62,7 @@ public class LinkedListDeque<T> implements Deque<T>{
             ptr = ptr.next;
         }
     }
+
     @Override
     public T removeFirst() {
         if (!isEmpty()) {
@@ -79,6 +83,7 @@ public class LinkedListDeque<T> implements Deque<T>{
             return null;
         }
     }
+
     @Override
     public T removeLast() {
         if (!isEmpty()) {
@@ -92,6 +97,7 @@ public class LinkedListDeque<T> implements Deque<T>{
             return null;
         }
     }
+
     @Override
     public T get(int index) {
         IntNode ptr = sentinel;
