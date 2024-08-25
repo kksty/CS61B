@@ -9,7 +9,7 @@ import byog.TileEngine.TETile;
 public class Main {
     public static void main(String[] args) {
         if (args.length > 1) {
-            System.out.println("Can only have one argument - the input string");
+            System.out.println("只能有一个参数 - 输入字符串");
             System.exit(0);
         } else if (args.length == 1) {
             Game game = new Game();
