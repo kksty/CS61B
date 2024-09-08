@@ -1,5 +1,7 @@
 package lab9;
 
+import org.junit.FixMethodOrder;
+
 import java.util.Iterator;
 import java.util.Set;
 
@@ -40,40 +42,67 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         size = 0;
     }
 
-    /** Returns the value mapped to by KEY in the subtree rooted in P.
-     *  or null if this map contains no mapping for the key.
+    /**
+     * 返回以 P 为根的子树中由 KEY 映射到的值。
+     * 如果此 map 为不包含KEY的 Map，则为 null。
      */
     private V getHelper(K key, Node p) {
-        throw new UnsupportedOperationException();
+        if (key == null) throw new IllegalArgumentException("calls get() with a null key");
+        if (p == null) return null;
+        int cmp = key.compareTo(p.key);
+        if (cmp < 0) {
+            return getHelper(key, p.left); // key小于根节点 往左边节点递归
+        } else if (cmp > 0) {
+            return getHelper(key, p.right); // key大于根节点 往右边节点递归
+        } else {
+            return p.value;
+        }
     }
 
-    /** Returns the value to which the specified key is mapped, or null if this
-     *  map contains no mapping for the key.
+    /**
+     * 返回指定键映射到的值，如果此
+     * map 不包含键的映射。
      */
     @Override
     public V get(K key) {
-        throw new UnsupportedOperationException();
+        return getHelper(key, root);
     }
 
-    /** Returns a BSTMap rooted in p with (KEY, VALUE) added as a key-value mapping.
-      * Or if p is null, it returns a one node BSTMap containing (KEY, VALUE).
+    /**
+     * 返回以 p 为根的 BSTMap，并添加 （KEY， VALUE） 作为键值映射。
+     * 或者，如果 p 为 null，则返回包含 （KEY， VALUE） 的单节点 BSTMap。
      */
     private Node putHelper(K key, V value, Node p) {
-        throw new UnsupportedOperationException();
+        // 如果是空节点，new一个新的子节点
+        if (p == null) {
+            size++;
+            return new Node(key, value);
+        }
+        // 如果不是空节点，查找key覆盖原来的值
+        int cmp = key.compareTo(p.key);
+        if (cmp < 0) {
+            p.left = putHelper(key, value, p.left);
+        } else if (cmp > 0) {
+            p.right = putHelper(key, value, p.right);
+        } else {
+            p.value = value;
+        }
+        return p;
     }
 
-    /** Inserts the key KEY
-     *  If it is already present, updates value to be VALUE.
+    /**
+     * 插入键 KEY
+     * 如果已存在，则将 value 更新为 VALUE。
      */
     @Override
     public void put(K key, V value) {
-        throw new UnsupportedOperationException();
+        root = putHelper(key, value, root);
     }
 
-    /* Returns the number of key-value mappings in this map. */
+    /* 返回此映射中键值映射的数量。 */
     @Override
     public int size() {
-        throw new UnsupportedOperationException();
+        return size;
     }
 
     //////////////// EVERYTHING BELOW THIS LINE IS OPTIONAL ////////////////
@@ -84,18 +113,20 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         throw new UnsupportedOperationException();
     }
 
-    /** Removes KEY from the tree if present
-     *  returns VALUE removed,
-     *  null on failed removal.
+    /**
+     * Removes KEY from the tree if present
+     * returns VALUE removed,
+     * null on failed removal.
      */
     @Override
     public V remove(K key) {
         throw new UnsupportedOperationException();
     }
 
-    /** Removes the key-value entry for the specified key only if it is
-     *  currently mapped to the specified value.  Returns the VALUE removed,
-     *  null on failed removal.
+    /**
+     * Removes the key-value entry for the specified key only if it is
+     * currently mapped to the specified value.  Returns the VALUE removed,
+     * null on failed removal.
      **/
     @Override
     public V remove(K key, V value) {
