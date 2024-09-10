@@ -34,9 +34,6 @@ public class TestComplexOomage {
         assertTrue(OomageTestUtility.haveNiceHashCodeSpread(oomages, 10));
     }
 
-    /* TODO：创建一个名为 deadlyList 的 ComplexOomages 列表
-     * 这显示了 hashCode 函数中的缺陷。
-     */
     @Test
     public void testWithDeadlyParams() {
         List<Oomage> deadlyList = new ArrayList<>();
