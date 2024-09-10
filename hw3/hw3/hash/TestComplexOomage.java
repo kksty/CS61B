@@ -40,7 +40,9 @@ public class TestComplexOomage {
         int N = 10000;
         for (int i = 0; i < N; i += 1) {
             List<Integer> params = new ArrayList<>();
-            params.add(255);
+            for (int j = 0; j < 4; j++) {
+                params.add(255);
+            }
             deadlyList.add(new ComplexOomage(params));
         }
         assertTrue(OomageTestUtility.haveNiceHashCodeSpread(deadlyList, 10));
