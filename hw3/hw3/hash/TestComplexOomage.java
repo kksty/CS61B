@@ -40,7 +40,7 @@ public class TestComplexOomage {
         int N = 10000;
         for (int i = 0; i < N; i += 1) {
             List<Integer> params = new ArrayList<>();
-            params.add(255); // 例如，所有参数都设置为 255
+            params.add(255);
             deadlyList.add(new ComplexOomage(params));
         }
         assertTrue(OomageTestUtility.haveNiceHashCodeSpread(deadlyList, 10));
