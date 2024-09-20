@@ -15,7 +15,7 @@ public abstract class MazeExplorer extends Observable {
     /**
      * Notify all Observers of a change.
      */
-    protected void announce() {
+        protected void announce() {
         setChanged();
         notifyObservers();
     }

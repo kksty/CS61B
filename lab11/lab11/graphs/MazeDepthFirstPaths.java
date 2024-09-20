@@ -1,7 +1,7 @@
 package lab11.graphs;
 
 /**
- *  @author Josh Hug
+ * @author Josh Hug
  */
 public class MazeDepthFirstPaths extends MazeExplorer {
     /* Inherits public fields:
