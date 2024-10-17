@@ -1,48 +1,60 @@
-/**
- * Class for doing Radix sort
- *
- * @author Akhil Batra, Alexander Hwang
- *
- */
 public class RadixSort {
     /**
-     * Does LSD radix sort on the passed in array with the following restrictions:
-     * The array can only have ASCII Strings (sequence of 1 byte characters)
-     * The sorting is stable and non-destructive
-     * The Strings can be variable length (all Strings are not constrained to 1 length)
+     * 对传入的字符串数组进行LSD基数排序，限制如下：
+     * 数组只能包含ASCII字符串（1字节字符序列）
+     * 排序是稳定且非破坏性的
+     * 字符串可以是可变长度的（所有字符串不受1长度限制）
      *
-     * @param asciis String[] that needs to be sorted
-     *
-     * @return String[] the sorted array
+     * @param asciis 需要排序的字符串数组
+     * @return 排序后的字符串数组
      */
     public static String[] sort(String[] asciis) {
-        // TODO: Implement LSD Sort
-        return null;
+        // 找到最长字符串的长度
+        int maxLength = 0;
+        for (String s : asciis) {
+            if (s.length() > maxLength) {
+                maxLength = s.length();
+            }
+        }
+
+        // 从最低有效位开始，对每一位进行计数排序
+        String[] sortedArray = asciis.clone();
+        for (int i = maxLength - 1; i >= 0; i--) {
+            sortHelperLSD(sortedArray, i);
+        }
+
+        return sortedArray;
     }
 
     /**
-     * LSD helper method that performs a destructive counting sort the array of
-     * Strings based off characters at a specific index.
-     * @param asciis Input array of Strings
-     * @param index The position to sort the Strings on.
+     * LSD辅助方法，根据特定索引的字符对字符串数组进行破坏性计数排序。
+     *
+     * @param asciis 输入的字符串数组
+     * @param index  要排序的字符位置
      */
     private static void sortHelperLSD(String[] asciis, int index) {
-        // Optional LSD helper method for required LSD radix sort
-        return;
-    }
+        int[] count = new int[256];
+        String[] output = new String[asciis.length];
 
-    /**
-     * MSD radix sort helper function that recursively calls itself to achieve the sorted array.
-     * Destructive method that changes the passed in array, asciis.
-     *
-     * @param asciis String[] to be sorted
-     * @param start int for where to start sorting in this method (includes String at start)
-     * @param end int for where to end sorting in this method (does not include String at end)
-     * @param index the index of the character the method is currently sorting on
-     *
-     **/
-    private static void sortHelperMSD(String[] asciis, int start, int end, int index) {
-        // Optional MSD helper method for optional MSD radix sort
-        return;
+        // 统计每个字符的出现次数
+        for (String s : asciis) {
+            int charIndex = index < s.length() ? (int)s.charAt(index) : 0;
+            count[charIndex]++;
+        }
+
+        // 计算每个字符的起始位置
+        for (int i = 1; i < 256; i++) {
+            count[i] += count[i - 1];
+        }
+
+        // 将字符串放置在正确的位置
+        for (int i = asciis.length - 1; i >= 0; i--) {
+            int charIndex = index < asciis[i].length() ? asciis[i].charAt(index) : 0;
+            output[count[charIndex] - 1] = asciis[i];
+            count[charIndex]--;
+        }
+
+        // 复制回原数组
+        System.arraycopy(output, 0, asciis, 0, asciis.length);
     }
 }

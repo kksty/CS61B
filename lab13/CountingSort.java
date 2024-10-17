@@ -2,7 +2,6 @@
  * Class with 2 ways of doing Counting sort, one naive way and one "better" way
  *
  * @author Akhil Batra, Alexander Hwang
- *
  **/
 public class CountingSort {
     /**
@@ -20,14 +19,13 @@ public class CountingSort {
             max = max > i ? max : i;
         }
 
-        // gather all the counts for each value
+        // 收集每个值的所有计数
         int[] counts = new int[max + 1];
         for (int i : arr) {
             counts[i]++;
         }
 
-        // when we're dealing with ints, we can just put each value
-        // count number of times into the new array
+        // 当我们处理 int 时，我们可以将每个 value count 放入新数组中多次
         int[] sorted = new int[arr.length];
         int k = 0;
         for (int i = 0; i < counts.length; i += 1) {
@@ -36,8 +34,7 @@ public class CountingSort {
             }
         }
 
-        // however, below is a more proper, generalized implementation of
-        // counting sort that uses start position calculation
+        // 但是，下面是使用 Start Position Calculation 的更合适、更通用的计数排序实现
         int[] starts = new int[max + 1];
         int pos = 0;
         for (int i = 0; i < starts.length; i += 1) {
@@ -66,7 +63,40 @@ public class CountingSort {
      * @param arr int array that will be sorted
      */
     public static int[] betterCountingSort(int[] arr) {
-        // TODO make counting sort work with arrays containing negative numbers.
-        return null;
+        // 找到最大值和最小值
+        int max = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
+        for (int i : arr) {
+            if (i > max) max = i;
+            if (i < min) min = i;
+        }
+
+        // 计算范围
+        int range = max - min + 1;
+
+        // 创建计数数组
+        int[] counts = new int[range];
+        for (int i : arr) {
+            counts[i - min]++;
+        }
+
+        // 计算起始位置
+        int[] starts = new int[range];
+        int pos = 0;
+        for (int i = 0; i < range; i++) {
+            starts[i] = pos;
+            pos += counts[i];
+        }
+
+        // 创建排序数组
+        int[] sorted = new int[arr.length];
+        for (int i : arr) {
+            int place = starts[i - min];
+            sorted[place] = i;
+            starts[i - min]++;
+        }
+
+        // 返回排序后的数组
+        return sorted;
     }
 }
