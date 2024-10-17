@@ -33,23 +33,23 @@ public class RadixSort {
      * @param index  要排序的字符位置
      */
     private static void sortHelperLSD(String[] asciis, int index) {
-        int[] count = new int[256];
+        int[] count = new int[257]; // 256 ASCII characters + 1 for padding
         String[] output = new String[asciis.length];
 
         // 统计每个字符的出现次数
         for (String s : asciis) {
-            int charIndex = index < s.length() ? (int)s.charAt(index) : 0;
+            int charIndex = index < s.length() ? (int)s.charAt(index) + 1 : 0;
             count[charIndex]++;
         }
 
         // 计算每个字符的起始位置
-        for (int i = 1; i < 256; i++) {
+        for (int i = 1; i < 257; i++) {
             count[i] += count[i - 1];
         }
 
         // 将字符串放置在正确的位置
         for (int i = asciis.length - 1; i >= 0; i--) {
-            int charIndex = index < asciis[i].length() ? asciis[i].charAt(index) : 0;
+            int charIndex = index < asciis[i].length() ? (int)asciis[i].charAt(index) + 1 : 0;
             output[count[charIndex] - 1] = asciis[i];
             count[charIndex]--;
         }
